@@ -131,7 +131,7 @@ export default function YachtDiagram({ dims, onChange }: Props) {
   return (
     <div style={{ background: '#fafafa', border: '1px solid #ddd', borderRadius: 8, padding: 12 }}>
       {/* 모드 토글 */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8, gap: 8, flexWrap: 'wrap' }}>
         <div style={{ fontSize: 12, color: '#555' }}>
           <b style={{ color: dims.sailing ? '#c26' : '#2b4b7a' }}>
             {dims.sailing ? '범선 (Sailing Vessel)' : '동력선 (Motor Vessel)'}
@@ -154,7 +154,8 @@ export default function YachtDiagram({ dims, onChange }: Props) {
         </div>
       </div>
 
-      <svg viewBox={`0 0 ${VB.w} ${VB.h}`} style={{ width: '100%', height: 'auto' }}>
+      <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch', margin: '0 -4px' }}>
+      <svg viewBox={`0 0 ${VB.w} ${VB.h}`} style={{ width: '100%', minWidth: 720, height: 'auto', display: 'block' }}>
         {/* Baseline */}
         <line x1={40} y1={keelY} x2={VB.w - 10} y2={keelY} stroke="#999" strokeDasharray="4 4" />
         <text x={46} y={keelY - 6} fontSize={11} fill="#666">B.L · Base Line (용골 하면)</text>
@@ -304,9 +305,10 @@ export default function YachtDiagram({ dims, onChange }: Props) {
           </marker>
         </defs>
       </svg>
+      </div>
 
       {/* 치수 입력 */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginTop: 8 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 10, marginTop: 8 }}>
         <DimInput label="L" hint="측정길이 / Tonnage Length [m]" value={dims.L} onChange={setNum('L')} />
         <DimInput label="Dm" hint="중앙 형깊이 / Moulded Depth (mid) [m]" value={dims.Dm} onChange={setNum('Dm')} color="#2b4b7a" />
         <DimInput label="Ds" hint="양단연결선까지 / Depth to Sheer Line [m]" value={dims.Ds} onChange={setNum('Ds')} color="#c26" />
@@ -325,7 +327,7 @@ export default function YachtDiagram({ dims, onChange }: Props) {
             <div style={{ fontSize: 12, color: '#555', marginBottom: 6 }}>
               범선 너비 측정 (Breadth, sailing vessel rule · 제19조 1항 단서)
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 10 }}>
               <DimInput label="B(25%)" hint="F.P.로부터 L·25% 뒤 / at 25% L aft of F.P." value={dims.B_25} onChange={setNum('B_25')} color="#c26" />
               <DimInput label="B(75%)" hint="F.P.로부터 L·75% 뒤 / at 75% L aft of F.P." value={dims.B_75} onChange={setNum('B_75')} color="#c26" />
               <DimInput label="Bmax" hint="선체 최광부 너비 / Max Moulded Breadth" value={dims.B_max} onChange={setNum('B_max')} color="#2b4b7a" />

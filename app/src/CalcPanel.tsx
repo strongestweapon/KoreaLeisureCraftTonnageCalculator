@@ -26,24 +26,24 @@ export default function CalcPanel({ calc }: Props) {
         <div style={{ fontSize: 11, color: '#64748b', marginBottom: 6, letterSpacing: 0.3 }}>
           V 공식 / Formula (Art. 9 입력값)
         </div>
-        <div style={{ fontFamily: 'ui-monospace, Menlo, monospace', fontSize: 12, lineHeight: 1.7 }}>
-          <span>V =</span>{' '}
-          <PlusTerm>V<sub>선체하부</sub></PlusTerm>{' '}
-          <Op>+</Op>{' '}
-          <PlusTerm>V<sub>돌출부</sub></PlusTerm>{' '}
-          <Op>+</Op>{' '}
-          <PlusTerm>V<sub>상부(＋포함)</sub></PlusTerm>{' '}
-          <Op>−</Op>{' '}
+        <div style={{ fontFamily: 'ui-monospace, Menlo, monospace', fontSize: 12, lineHeight: 1.7, display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 4 }}>
+          <span>V =</span>
+          <PlusTerm>V<sub>선체하부</sub></PlusTerm>
+          <Op>+</Op>
+          <PlusTerm>V<sub>돌출부</sub></PlusTerm>
+          <Op>+</Op>
+          <PlusTerm>V<sub>상부(＋포함)</sub></PlusTerm>
+          <Op>−</Op>
           <MinusTerm>V<sub>상부(−제외)</sub></MinusTerm>
         </div>
-        <div style={{ fontFamily: 'ui-monospace, Menlo, monospace', fontSize: 12, marginTop: 4, color: '#334155' }}>
-          <span>= </span>
-          <PlusNum>{f(calc.V_hull, 3)}</PlusNum>{' '}
-          <Op>+</Op>{' '}
-          <PlusNum>{f(calc.V_added, 3)}</PlusNum>{' '}
-          <Op>+</Op>{' '}
-          <PlusNum>{f(calc.V_upperEnclosed, 3)}</PlusNum>{' '}
-          <Op>−</Op>{' '}
+        <div style={{ fontFamily: 'ui-monospace, Menlo, monospace', fontSize: 12, marginTop: 4, color: '#334155', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 4 }}>
+          <span>=</span>
+          <PlusNum>{f(calc.V_hull, 3)}</PlusNum>
+          <Op>+</Op>
+          <PlusNum>{f(calc.V_added, 3)}</PlusNum>
+          <Op>+</Op>
+          <PlusNum>{f(calc.V_upperEnclosed, 3)}</PlusNum>
+          <Op>−</Op>
           <MinusNum>{f(calc.V_upperExcluded, 3)}</MinusNum>
         </div>
         <div style={{ marginTop: 6, fontSize: 13, fontWeight: 700 }}>

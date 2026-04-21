@@ -15,6 +15,7 @@
   margin: 0;
   font-size: 22px;
   letter-spacing: -0.3px;
+  line-height: 1.25;
 }
 .app-header p {
   margin: 4px 0 0;
@@ -45,8 +46,75 @@
   color: #888;
 }
 
+/* 태블릿 이하: 사이드바를 아래로 스택 */
 @media (max-width: 960px) {
   .layout {
     grid-template-columns: 1fr;
+  }
+  .col-side {
+    position: static !important;
+  }
+}
+
+/* BoxList row — 데스크톱: 한 줄, 모바일: 2행 */
+.box-row {
+  display: grid;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+.box-row.toggle {
+  grid-template-columns: auto 1.6fr 0.8fr 0.8fr 0.8fr 0.9fr 1.1fr auto;
+  grid-template-areas: "badge name L B D vol kind del";
+}
+.box-row.fixed {
+  grid-template-columns: auto 1.6fr 0.8fr 0.8fr 0.8fr 0.9fr auto;
+  grid-template-areas: "badge name L B D vol del";
+}
+.box-row .ba-badge { grid-area: badge; }
+.box-row .ba-name  { grid-area: name; }
+.box-row .ba-L     { grid-area: L; }
+.box-row .ba-B     { grid-area: B; }
+.box-row .ba-D     { grid-area: D; }
+.box-row .ba-vol   { grid-area: vol; }
+.box-row .ba-kind  { grid-area: kind; }
+.box-row .ba-del   { grid-area: del; }
+
+@media (max-width: 640px) {
+  .box-row.toggle {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "badge name del"
+      "L B D"
+      "vol vol kind";
+  }
+  .box-row.fixed {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "badge name del"
+      "L B D"
+      "vol vol vol";
+  }
+  .box-row .ba-vol { text-align: left !important; padding-left: 0 !important; }
+}
+
+/* 폰: 패딩·폰트 축소 */
+@media (max-width: 640px) {
+  .app {
+    padding: 12px 12px 32px;
+  }
+  .app-header h1 {
+    font-size: 17px;
+  }
+  .app-header p {
+    font-size: 11px;
+  }
+  .sec {
+    font-size: 13px;
+  }
+  .layout {
+    gap: 14px;
   }
 }
