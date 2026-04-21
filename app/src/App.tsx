@@ -40,10 +40,10 @@ export default function App() {
           </section>
 
           <section>
-            <h2 className="sec">② 돌출부 / Added Parts — 제19조 2항 (Beyond F.P. / A.P.)</h2>
+            <h2 className="sec">② <span style={{ color: '#166534' }}>＋</span> 돌출부 / Added Parts — 제19조 2항 (Beyond F.P. / A.P.)</h2>
             <BoxList
-              title="돌출부 / Protruding Hull Parts"
-              subtitle="측정길이 전단(F.P.) 앞 또는 후단(A.P.) 뒤로 튀어나온 선체부분 · Treated as enclosed volume and added."
+              title="돌출부 / Protruding Hull Parts  (항상 ＋포함)"
+              subtitle="측정길이 전단(F.P.) 앞 또는 후단(A.P.) 뒤로 튀어나온 선체부분 · 무조건 V에 더해짐 (Treated as enclosed volume and added)."
               boxes={addedParts}
               onChange={setAddedParts}
               presetNames={['선수 오버행 (Bow overhang)', '선미 플랫폼 (Stern platform)']}
@@ -53,10 +53,10 @@ export default function App() {
           </section>
 
           <section>
-            <h2 className="sec">③ 상갑판 상부 / Above Upper Deck (UC-3)</h2>
+            <h2 className="sec">③ <span style={{ color: '#166534' }}>＋</span>/<span style={{ color: '#991b1b' }}>−</span> 상갑판 상부 / Above Upper Deck (UC-3)</h2>
             <BoxList
-              title="상부 구조물 / Upper Structures"
-              subtitle="최대길이 × 평균너비 × 평균깊이 근사 · Choose Enclosed (closed) / Excluded (open) correctly."
+              title="상부 구조물 / Upper Structures  (＋포함 or −제외 선택)"
+              subtitle="최대길이 × 평균너비 × 평균깊이 근사 · ＋포함(폐위, closed space) 은 더하고, −제외(open, 콕핏 등) 는 V에서 뺌."
               boxes={upperStructures}
               onChange={setUpperStructures}
               presetNames={[

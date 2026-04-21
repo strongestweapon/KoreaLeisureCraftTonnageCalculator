@@ -16,6 +16,41 @@ export default function CalcPanel({ calc }: Props) {
     }}>
       <h3 style={{ margin: '0 0 10px', fontSize: 15 }}>계산 결과 / Calculation (debug)</h3>
 
+      <div style={{
+        border: '1px solid #cbd5e1',
+        borderRadius: 6,
+        background: '#f8fafc',
+        padding: '10px 12px',
+        marginBottom: 12
+      }}>
+        <div style={{ fontSize: 11, color: '#64748b', marginBottom: 6, letterSpacing: 0.3 }}>
+          V 공식 / Formula (Art. 9 입력값)
+        </div>
+        <div style={{ fontFamily: 'ui-monospace, Menlo, monospace', fontSize: 12, lineHeight: 1.7 }}>
+          <span>V =</span>{' '}
+          <PlusTerm>V<sub>선체하부</sub></PlusTerm>{' '}
+          <Op>+</Op>{' '}
+          <PlusTerm>V<sub>돌출부</sub></PlusTerm>{' '}
+          <Op>+</Op>{' '}
+          <PlusTerm>V<sub>상부(＋포함)</sub></PlusTerm>{' '}
+          <Op>−</Op>{' '}
+          <MinusTerm>V<sub>상부(−제외)</sub></MinusTerm>
+        </div>
+        <div style={{ fontFamily: 'ui-monospace, Menlo, monospace', fontSize: 12, marginTop: 4, color: '#334155' }}>
+          <span>= </span>
+          <PlusNum>{f(calc.V_hull, 3)}</PlusNum>{' '}
+          <Op>+</Op>{' '}
+          <PlusNum>{f(calc.V_added, 3)}</PlusNum>{' '}
+          <Op>+</Op>{' '}
+          <PlusNum>{f(calc.V_upperEnclosed, 3)}</PlusNum>{' '}
+          <Op>−</Op>{' '}
+          <MinusNum>{f(calc.V_upperExcluded, 3)}</MinusNum>
+        </div>
+        <div style={{ marginTop: 6, fontSize: 13, fontWeight: 700 }}>
+          = <span style={{ color: '#1e3a8a' }}>{f(calc.V, 3)} ㎥</span>
+        </div>
+      </div>
+
       <Group title="제19조 1항 · Hull Volume (Art. 19-1)">
         <Row
           k={`B 적용값 (${
@@ -87,6 +122,30 @@ function Group({ title, children }: { title: string; children: React.ReactNode }
       </div>
     </div>
   );
+}
+
+function PlusTerm({ children }: { children: React.ReactNode }) {
+  return (
+    <span style={{ background: '#ecf7ec', color: '#166534', padding: '1px 5px', borderRadius: 3, border: '1px solid #bbe2bb' }}>
+      {children}
+    </span>
+  );
+}
+function MinusTerm({ children }: { children: React.ReactNode }) {
+  return (
+    <span style={{ background: '#fdecec', color: '#991b1b', padding: '1px 5px', borderRadius: 3, border: '1px solid #f0b5b5' }}>
+      {children}
+    </span>
+  );
+}
+function PlusNum({ children }: { children: React.ReactNode }) {
+  return <span style={{ color: '#166534', fontWeight: 600 }}>{children}</span>;
+}
+function MinusNum({ children }: { children: React.ReactNode }) {
+  return <span style={{ color: '#991b1b', fontWeight: 600 }}>{children}</span>;
+}
+function Op({ children }: { children: React.ReactNode }) {
+  return <span style={{ color: '#475569', fontWeight: 700, padding: '0 2px' }}>{children}</span>;
 }
 
 function Row({ k, v, emphasize = false }: { k: string; v: string; emphasize?: boolean }) {

@@ -50,45 +50,59 @@ export default function BoxList({
         <p style={{ fontSize: 12, color: '#999', margin: '8px 0' }}>항목 없음</p>
       )}
 
-      {boxes.map((b) => (
-        <div
-          key={b.id}
-          style={{
-            display: 'grid',
-            gridTemplateColumns: allowKindToggle
-              ? '1.6fr 0.8fr 0.8fr 0.8fr 0.9fr 0.9fr auto'
-              : '1.6fr 0.8fr 0.8fr 0.8fr 0.9fr auto',
-            gap: 6,
-            alignItems: 'center',
-            marginBottom: 6
-          }}
-        >
-          <input
-            type="text"
-            placeholder="명칭 (예: 선수루)"
-            value={b.name}
-            onChange={(e) => update(b.id, { name: e.target.value })}
-            style={inp}
-          />
-          <input type="number" step="0.01" min="0" placeholder="길이" value={b.length || ''} onChange={(e) => update(b.id, { length: parseFloat(e.target.value) || 0 })} style={inp} />
-          <input type="number" step="0.01" min="0" placeholder="너비" value={b.breadth || ''} onChange={(e) => update(b.id, { breadth: parseFloat(e.target.value) || 0 })} style={inp} />
-          <input type="number" step="0.01" min="0" placeholder="깊이" value={b.depth || ''} onChange={(e) => update(b.id, { depth: parseFloat(e.target.value) || 0 })} style={inp} />
-          <div style={{ fontSize: 12, color: '#333', textAlign: 'right', paddingRight: 4 }}>
-            {boxVolume(b).toFixed(3)} ㎥
+      {boxes.map((b) => {
+        const isAdd = b.kind === 'enclosed';
+        return (
+          <div
+            key={b.id}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: allowKindToggle
+                ? 'auto 1.6fr 0.8fr 0.8fr 0.8fr 0.9fr 1.1fr auto'
+                : 'auto 1.6fr 0.8fr 0.8fr 0.8fr 0.9fr auto',
+              gap: 6,
+              alignItems: 'center',
+              marginBottom: 6,
+              padding: '4px 6px',
+              borderRadius: 4,
+              background: isAdd ? '#ecf7ec' : '#fdecec',
+              borderLeft: `3px solid ${isAdd ? '#2a7' : '#c33'}`
+            }}
+          >
+            <span style={{
+              width: 22, height: 22, borderRadius: 4, display: 'inline-flex',
+              alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14,
+              background: isAdd ? '#2a7' : '#c33', color: '#fff'
+            }}>
+              {isAdd ? '+' : '−'}
+            </span>
+            <input
+              type="text"
+              placeholder="명칭 (예: 선수루)"
+              value={b.name}
+              onChange={(e) => update(b.id, { name: e.target.value })}
+              style={inp}
+            />
+            <input type="number" step="0.01" min="0" placeholder="길이" value={b.length || ''} onChange={(e) => update(b.id, { length: parseFloat(e.target.value) || 0 })} style={inp} />
+            <input type="number" step="0.01" min="0" placeholder="너비" value={b.breadth || ''} onChange={(e) => update(b.id, { breadth: parseFloat(e.target.value) || 0 })} style={inp} />
+            <input type="number" step="0.01" min="0" placeholder="깊이" value={b.depth || ''} onChange={(e) => update(b.id, { depth: parseFloat(e.target.value) || 0 })} style={inp} />
+            <div style={{ fontSize: 12, color: '#333', textAlign: 'right', paddingRight: 4 }}>
+              {boxVolume(b).toFixed(3)} ㎥
+            </div>
+            {allowKindToggle && (
+              <select
+                value={b.kind}
+                onChange={(e) => update(b.id, { kind: e.target.value as Box['kind'] })}
+                style={{ ...inp, padding: '5px', fontWeight: 700, color: isAdd ? '#2a7' : '#c33' }}
+              >
+                <option value="enclosed">＋ 포함 (폐위)</option>
+                <option value="excluded">－ 제외 (excluded)</option>
+              </select>
+            )}
+            <button onClick={() => remove(b.id)} style={btnDel}>×</button>
           </div>
-          {allowKindToggle && (
-            <select
-              value={b.kind}
-              onChange={(e) => update(b.id, { kind: e.target.value as Box['kind'] })}
-              style={{ ...inp, padding: '5px' }}
-            >
-              <option value="enclosed">폐위</option>
-              <option value="excluded">제외</option>
-            </select>
-          )}
-          <button onClick={() => remove(b.id)} style={btnDel}>×</button>
-        </div>
-      ))}
+        );
+      })}
 
       <div style={{ marginTop: 8, display: 'flex', flexWrap: 'wrap', gap: 6 }}>
         {presetNames.map((n) => (
