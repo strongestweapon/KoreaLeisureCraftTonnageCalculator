@@ -227,10 +227,10 @@ export default function YachtDiagram({ dims, onChange }: Props) {
         {dims.sailing && (
           <g opacity={0.75}>
             <line x1={midX - 30} y1={deckY - camberLift - 6} x2={midX - 30} y2={10} stroke="#334" strokeWidth={2} />
-            <line x1={midX - 30} y1={deckY - 4} x2={midX + 100} y2={deckY - 4} stroke="#334" strokeWidth={2} />
-            {/* 돛 실루엣 */}
+            <line x1={midX - 30} y1={deckY - 4} x2={midX + 20} y2={deckY - 4} stroke="#334" strokeWidth={2} />
+            {/* 돛 실루엣 (붐 길이에 맞춤) */}
             <path
-              d={`M ${midX - 30} 14 L ${midX + 95} ${deckY - 8} L ${midX - 30} ${deckY - 8} Z`}
+              d={`M ${midX - 30} 14 L ${midX + 15} ${deckY - 8} L ${midX - 30} ${deckY - 8} Z`}
               fill="#fff"
               stroke="#88a"
               strokeWidth={1}
@@ -241,10 +241,10 @@ export default function YachtDiagram({ dims, onChange }: Props) {
 
         {/* 워터라인 선 (선체 위에 올려 잘 보이게) */}
         <line x1={30} y1={wlY} x2={VB.w - 10} y2={wlY} stroke="#2a8ab8" strokeWidth={1.5} strokeDasharray="6 3" />
-        <text x={VB.w - 48} y={wlY - 5} fontSize={11} fill="#2a8ab8" fontWeight={700}>W.L</text>
-        <text x={VB.w - 260} y={wlY - 5} fontSize={10} fill="#2a8ab8" opacity={0.9}>
-          계획만재흘수선 / Designed Water Line · 형깊이 85%
+        <text x={40} y={wlY - 5} fontSize={10} fill="#2a8ab8" opacity={0.9}>
+          W.L · 계획만재흘수선 (형깊이 85%)
         </text>
+        <text x={VB.w - 48} y={wlY - 5} fontSize={11} fill="#2a8ab8" fontWeight={700}>W.L</text>
 
         {/* ==================== Dm 측정 (파랑) ==================== */}
         {/* 시작점 ① 용골 하면 (keelY) / 끝점 ② 선측 상갑판 하면 (deckY) */}
@@ -269,14 +269,7 @@ export default function YachtDiagram({ dims, onChange }: Props) {
         <NumDot cx={fpX + 30} cy={dsY} n={3} color="#c26" small />
         <NumDot cx={apX - 30} cy={dsY} n={3} color="#c26" small />
 
-        {/* ==================== 캠버 C (녹색) ==================== */}
-        {/* 갑판 현측 라인 (deckY) 과 갑판 중앙 (deckY - camberLift) 간 수직거리 */}
-        <line x1={midX - 120} y1={deckY} x2={midX - 70} y2={deckY} stroke="#2a7" strokeDasharray="3 3" />
-        <line x1={midX - 120} y1={deckY - camberLift} x2={midX - 70} y2={deckY - camberLift} stroke="#2a7" strokeDasharray="3 3" />
-        <line x1={midX - 100} y1={deckY} x2={midX - 100} y2={deckY - camberLift} stroke="#2a7" strokeWidth={1.5} markerEnd="url(#arrG)" markerStart="url(#arrG)" />
-        <text x={midX - 140} y={deckY - camberLift - 6} fontSize={13} fill="#2a7" fontWeight={700}>C</text>
-        <NumDot cx={midX - 100} cy={deckY} n={2} color="#2a7" />
-        <NumDot cx={midX - 100} cy={deckY - camberLift} n={4} color="#2a7" />
+        {/* 캠버 C 는 가로단면 개념이므로 우측 '중앙 단면 상세' 인셋에서만 표시 */}
 
         {/* 중앙 수직 기준선 (흐리게) */}
         <line x1={midX} y1={deckY - camberLift - 5} x2={midX} y2={keelY} stroke="#aaa" strokeDasharray="1 3" />
