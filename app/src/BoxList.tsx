@@ -76,9 +76,12 @@ export default function BoxList({
               onChange={(e) => update(b.id, { name: e.target.value })}
               style={inp}
             />
+            <button className="ba-del" onClick={() => remove(b.id)} style={btnDel}>×</button>
+            <div className="ba-break" />
             <input className="ba-L" type="number" step="0.01" min="0" placeholder="길이" value={b.length || ''} onChange={(e) => update(b.id, { length: parseFloat(e.target.value) || 0 })} style={inp} />
             <input className="ba-B" type="number" step="0.01" min="0" placeholder="너비" value={b.breadth || ''} onChange={(e) => update(b.id, { breadth: parseFloat(e.target.value) || 0 })} style={inp} />
             <input className="ba-D" type="number" step="0.01" min="0" placeholder="깊이" value={b.depth || ''} onChange={(e) => update(b.id, { depth: parseFloat(e.target.value) || 0 })} style={inp} />
+            <div className="ba-break" />
             <div className="ba-vol" style={{ fontSize: 12, color: '#333', textAlign: 'right', paddingRight: 4 }}>
               {boxVolume(b).toFixed(3)} ㎥
             </div>
@@ -93,7 +96,6 @@ export default function BoxList({
                 <option value="excluded">－ 제외 (excluded)</option>
               </select>
             )}
-            <button className="ba-del" onClick={() => remove(b.id)} style={btnDel}>×</button>
           </div>
         );
       })}
