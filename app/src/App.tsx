@@ -84,7 +84,7 @@ export default function App() {
           공식 총톤수는 반드시 검사대행기관의 실측을 따르세요.
         </p>
         <p style={{ marginTop: 6 }}>
-          제작 · Credit: <b>랜덤호 KOR 132 선장 송호준</b> (Capt. Hojun Song, <i>s/v RANDOM · KOR 132</i>)
+          Credit: <b>랜덤호 KOR 132 선장 송호준</b>
         </p>
       </footer>
     </div>
