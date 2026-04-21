@@ -223,22 +223,6 @@ export default function YachtDiagram({ dims, onChange }: Props) {
         {/* 선체 */}
         <path d={hullPath} fill="#e8f0fa" stroke="#2b4b7a" strokeWidth={2} />
 
-        {/* 마스트 + 붐 (범선 모드 시각 힌트) */}
-        {dims.sailing && (
-          <g opacity={0.75}>
-            <line x1={midX - 30} y1={deckY - camberLift - 6} x2={midX - 30} y2={10} stroke="#334" strokeWidth={2} />
-            <line x1={midX - 30} y1={deckY - 4} x2={midX + 20} y2={deckY - 4} stroke="#334" strokeWidth={2} />
-            {/* 돛 실루엣 (붐 길이에 맞춤) */}
-            <path
-              d={`M ${midX - 30} 14 L ${midX + 15} ${deckY - 8} L ${midX - 30} ${deckY - 8} Z`}
-              fill="#fff"
-              stroke="#88a"
-              strokeWidth={1}
-              opacity={0.6}
-            />
-          </g>
-        )}
-
         {/* 워터라인 선 (선체 위에 올려 잘 보이게) */}
         <line x1={30} y1={wlY} x2={VB.w - 10} y2={wlY} stroke="#2a8ab8" strokeWidth={1.5} strokeDasharray="6 3" />
         <text x={40} y={wlY - 5} fontSize={10} fill="#2a8ab8" opacity={0.9}>
